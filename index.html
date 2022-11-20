@@ -7,71 +7,35 @@
    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
    <script type="text/babel">
-      const root = document.getElementById('root');
+      function Btn({ text, changeValue }) {
+         // 오브젝트에서 바로 데이터 꺼냄
+         console.log(text, 'was rendered');
+         return (
+            <button
+               onClick={changeValue}
+               style={{
+                  backgroundColor: 'tomato',
+                  color: 'white',
+                  padding: '10px 20px',
+                  border: 0,
+                  borderRadius: 10,
+               }}>
+               {text}
+            </button>
+         );
+      }
+
+      const MemorizedBtn = React.memo(Btn); // props가 변경되지 않으면 다시 렌더링하지 않음
 
       function App() {
-         const [index, setIndex] = React.useState(0);
-         const onSelect = event => {
-            setIndex(event.target.value);
-         };
+         const [value, setValue] = React.useState('Save Changes');
+         const changeValue = () => setValue('Revert Changes');
          return (
             <div>
-               <h1 className="hi">Super Converter</h1>
-               <select value={index} onChange={onSelect}>
-                  <option value="0">Minutes & hours</option>
-                  <option value="1">Km & Miles</option>
-               </select>
-               {index === '0' ? <MinutesToHours /> : null}
-               {index === '1' ? <KmToMiles /> : null}
+               <MemorizedBtn text={value} changeValue={changeValue} />
+               <MemorizedBtn text="Continue" />
             </div>
          );
-      }
-
-      function MinutesToHours() {
-         const [amount, setAmount] = React.useState(0);
-         const [inverted, setInverted] = React.useState(false);
-         const onChage = event => {
-            setAmount(event.target.value);
-         };
-         const onReset = () => {
-            setAmount(0);
-         };
-         const onFlip = () => {
-            onReset();
-            setInverted(current => !current);
-         };
-         return (
-            <div>
-               <div>
-                  <label htmlFor="minutes">Minutes</label>
-                  <input
-                     value={inverted ? amount * 60 : amount}
-                     id="minutes"
-                     placeholder="Minutes"
-                     type="number"
-                     onChange={onChage}
-                     disabled={inverted}
-                  />
-               </div>
-               <div>
-                  <label htmlFor="hours">Hours</label>
-                  <input
-                     value={inverted ? amount : amount / 60}
-                     id="hours"
-                     placeholder="Hours"
-                     type="number"
-                     disabled={!inverted}
-                     onChange={onChage}
-                  />
-               </div>
-               <button onClick={onReset}>Reset</button>
-               <button onClick={onFlip}>{inverted ? 'Turn Back' : 'Invert'}</button>
-            </div>
-         );
-      }
-
-      function KmToMiles() {
-         return <h3>KM 2 M </h3>;
       }
 
       ReactDOM.render(<App />, root); // 컨테이너 리렌더링(데이터가 바뀔 UI에서 바뀐 부분만 업데이트 해줌)
