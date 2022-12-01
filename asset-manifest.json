@@ -1,10 +1,13 @@
 {
   "files": {
-    "main.js": "/https://github.com/chohyeonK/try-react.git/static/js/main.0a048f2b.js",
-    "index.html": "/https://github.com/chohyeonK/try-react.git/index.html",
-    "main.0a048f2b.js.map": "/https://github.com/chohyeonK/try-react.git/static/js/main.0a048f2b.js.map"
+    "main.css": "/movie_app_2022/static/css/main.d31b5e86.css",
+    "main.js": "/movie_app_2022/static/js/main.b3bae03b.js",
+    "index.html": "/movie_app_2022/index.html",
+    "main.d31b5e86.css.map": "/movie_app_2022/static/css/main.d31b5e86.css.map",
+    "main.b3bae03b.js.map": "/movie_app_2022/static/js/main.b3bae03b.js.map"
   },
   "entrypoints": [
-    "static/js/main.0a048f2b.js"
+    "static/css/main.d31b5e86.css",
+    "static/js/main.b3bae03b.js"
   ]
 }
